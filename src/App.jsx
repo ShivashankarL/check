@@ -1,12 +1,15 @@
-import React from 'react';
-import './App.css';
-import RoadChainage from './RoadChainage';
+import React from "react";
+import "./App.css";
+import RoadChainage from "./RoadChainage";
+import {LoadScript} from "@react-google-maps/api";
+import MapComponent from "./Maps2";
 
 function App() {
   return (
     <div className="App">
       <h1>Road Chainage Osfdsverlay</h1>
-      <RoadChainage />
+      {/* <RoadChainage /> */}
+      <MapComponent />
     </div>
   );
 }

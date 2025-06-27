@@ -1,40 +1,50 @@
-import React from "react";
-import {GoogleMap, Polyline, Marker} from "@react-google-maps/api";
+import React, {useState, useEffect} from "react";
+import {
+  GoogleMap,
+  LoadScript,
+  DirectionsService,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
 
 const MapComponent = () => {
+  const [directions, setDirections] = useState(null);
   const center = {lat: 43.6532, lng: -79.3832}; // Center on Toronto
-  const routes = [
-    {lat: 43.6777, lng: -79.6248}, // Brampton
-    {lat: 43.6532, lng: -79.3832}, // Toronto
-    {lat: 43.8561, lng: -79.3389}, // Markham
+  const waypoints = [
+    {location: {lat: 43.6777, lng: -79.6248}}, // Brampton
+    {location: {lat: 43.8561, lng: -79.3389}}, // Markham
   ];
+  const destination = {lat: 43.8561, lng: -79.3389}; // Ending point
+  const origin = {lat: 43.6777, lng: -79.6248}; // Starting point
 
-  const pathCoordinates = [
-    {lat: 43.6777, lng: -79.6248},
-    {lat: 43.6532, lng: -79.3832},
-    {lat: 43.8561, lng: -79.3389},
-  ];
+  const directionsOptions = {
+    origin: origin,
+    destination: destination,
+    waypoints: waypoints,
+    travelMode: "DRIVING", // Options: DRIVING, WALKING, BICYCLING, TRANSIT
+  };
+
+  const directionsCallback = (response) => {
+    if (response !== null && response.status === "OK") {
+      setDirections(response);
+    }
+  };
 
   return (
-    <GoogleMap
-      mapContainerStyle={{height: "400px", width: "100%"}}
-      center={center}
-      zoom={10}
-    >
-      {/* Polyline for routes */}
-      <Polyline
-        path={pathCoordinates}
-        options={{
-          strokeColor: "#00FF00",
-          strokeOpacity: 1.0,
-          strokeWeight: 2,
-        }}
-      />
-      {/* Markers for key locations */}
-      {routes.map((location, index) => (
-        <Marker key={index} position={location} />
-      ))}
-    </GoogleMap>
+    <LoadScript googleMapsApiKey="AIzaSyADsDeet4Re2Yt-lGU83dyLeMmXeaXrPfg">
+      <GoogleMap
+        mapContainerStyle={{height: "400px", width: "100%"}}
+        center={center}
+        zoom={10}
+      >
+        {directions && <DirectionsRenderer directions={directions} />}
+        {!directions && (
+          <DirectionsService
+            options={directionsOptions}
+            callback={directionsCallback}
+          />
+        )}
+      </GoogleMap>
+    </LoadScript>
   );
 };
 
