@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import RoadChainage from "./RoadChainage";
 import {LoadScript} from "@react-google-maps/api";
-import MapComponent from "./Maps2";
+import MapComponent from "./MapsMain";
 
 function App() {
   return (

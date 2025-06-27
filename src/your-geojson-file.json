@@ -1,0 +1,28 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Karnataka",
+        "state_code": "KA",
+        "description": "Boundary of Karnataka state, India",
+        "color": "#800080"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [74.5, 18.0],
+            [77.0, 18.5],
+            [78.5, 17.0],
+            [78.0, 14.0],
+            [76.0, 11.5],
+            [74.0, 12.0],
+            [74.5, 18.0]
+          ]
+        ]
+      }
+    }
+  ]
+}
